@@ -1,6 +1,8 @@
 import "dotenv/config";
 import express from "express";
 import  connectDB  from "./config/db.js";
+import cors from "cors";
+
 
 import studentRoutes from "./routes/studentRoutes.js";
 import teacherRoutes from "./routes/teacherRoutes.js";
@@ -11,6 +13,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json({ limit: "1mb" }));
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
 
 app.use("/api/students", studentRoutes);
 app.use("/api/teachers", teacherRoutes);
